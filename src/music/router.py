@@ -1,7 +1,6 @@
 from fastapi import APIRouter
 from fastapi.responses import JSONResponse, Response
 from fastapi.encoders import jsonable_encoder
-import datetime
 from . import service
 from .schemas import Band as BandSchema
 
