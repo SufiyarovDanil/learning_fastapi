@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from music.router import router as music_router
+from bands.router import router as music_router
 
 
 app: FastAPI = FastAPI(title='Music API')

@@ -10,7 +10,7 @@ import os, sys
 sys.path.append(os.path.join(sys.path[0], 'src'))
 
 from src.config import config as env_config
-from src.music.models import BaseModel
+from src.bands.models import BaseModel
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
