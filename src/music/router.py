@@ -46,8 +46,8 @@ async def update_band(band: BandSchema) -> Response:
     return Response(status_code=200)
 
 
-# @router.delete('/', tags=['band'], response_class=Response)
-# async def delete_band(id: int) -> Response:
-#     await service.delete_band(id)
+@router.delete('/', tags=['band'], response_class=Response)
+async def delete_band(id: int) -> Response:
+    await service.delete_band(id)
 
-#     return Response(status_code=200)
+    return Response(status_code=200)
