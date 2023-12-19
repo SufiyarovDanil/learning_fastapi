@@ -1,4 +1,4 @@
-from sqlalchemy import select
+from sqlalchemy import select, delete
 from datetime import date
 from database import async_session_factory
 from .models import BandModel
@@ -41,9 +41,6 @@ async def update_band(id: int, name: str = None, created_at: date = None) -> Non
 
 async def delete_band(id: int) -> None:
     async with async_session_factory() as session:
-        band: BandModel = session.get(BandModel, id)
-
-        if band is not None:
-            await session.delete()
-        
+        statement = delete(BandModel).where(BandModel.id == id)
+        session.execute(statement)
         await session.commit()
