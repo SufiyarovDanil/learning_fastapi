@@ -2,7 +2,7 @@ from fastapi import APIRouter
 from fastapi.responses import JSONResponse, Response
 from fastapi.encoders import jsonable_encoder
 from . import service
-from schemas import Album as AlbumSchema
+from .schemas import AlbumCreate, AlbumUpdate
 
 
 router: APIRouter = APIRouter(
@@ -32,14 +32,14 @@ async def get_album_by_id(id: int) -> JSONResponse:
 
 
 @router.post('/album')
-async def add_band(album: AlbumSchema) -> Response:
+async def add_band(album: AlbumCreate) -> Response:
     await service.add_album(album.name, album.band_id, album.published_at)
 
     return Response(status_code=200)
 
 
 @router.put('/album')
-async def update_album(album: AlbumSchema) -> Response:
+async def update_album(album: AlbumUpdate) -> Response:
     await service.update_album(
         album.id,
         album.name,

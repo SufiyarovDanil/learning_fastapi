@@ -29,7 +29,7 @@ async def add_album(name: str, band_id: int, published_at: date = None) -> None:
 
 async def update_album(id: int, name: str = None, band_id: int = None, published_at: date = None) -> None:
     async with async_session_factory() as session:
-        album: AlbumModel = session.get(AlbumModel, id)
+        album: AlbumModel = await session.get(AlbumModel, id)
 
         if album is None:
            return # TODO create exception for this
