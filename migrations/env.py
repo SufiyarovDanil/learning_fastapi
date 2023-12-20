@@ -16,13 +16,7 @@ from src.bands.models import BaseModel
 # access to the values within the .ini file in use.
 config = context.config
 config.set_main_option('sqlalchemy.url', env_config.database_uri_asyncpg + '?async_fallback=True')
-print(env_config.database_uri_asyncpg + '?async_fallback=True')
-# section = config.config_ini_section
-# config.set_section_option(section, 'DB_USER', env_config.DB_USER)
-# config.set_section_option(section, 'DB_PASS', env_config.DB_PASS)
-# config.set_section_option(section, 'DB_HOST', env_config.DB_HOST)
-# config.set_section_option(section, 'DB_PORT', str(env_config.DB_PORT))
-# config.set_section_option(section, 'DB_NAME', env_config.DB_NAME)
+
 
 # Interpret the config file for Python logging.
 # This line sets up loggers basically.
