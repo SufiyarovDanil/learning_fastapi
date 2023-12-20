@@ -5,12 +5,10 @@ from sqlalchemy import pool
 
 from alembic import context
 
-import os, sys
-
-sys.path.append(os.path.join(sys.path[0], 'src'))
-
-from src.config import config as env_config
-from src.bands.models import BaseModel
+from config import config as env_config
+from database import BaseModel
+from bands.models import BandModel, GenreModel, AlbumGenreModel
+from albums.models import AlbumModel, TrackModel
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.

@@ -1,7 +1,6 @@
 from sqlalchemy import BigInteger, VARCHAR, Date, ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from database import BaseModel
-import albums.models
 
 
 class BandModel(BaseModel):
@@ -24,7 +23,7 @@ class BandModel(BaseModel):
         name='created_at'
     )
 
-    albums: Mapped[list['albums.models.AlbumModel']] = relationship(back_populates='band')
+    albums = relationship('AlbumModel', back_populates='band')
 
 
 class GenreModel(BaseModel):
