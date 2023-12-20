@@ -1,4 +1,4 @@
-from sqlalchemy import SmallInteger, BigInteger, VARCHAR, Date, ForeignKey
+from sqlalchemy import BigInteger, VARCHAR, Date, ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from database import BaseModel
 import albums.models
