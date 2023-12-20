@@ -3,6 +3,12 @@ from pydantic.types import date
 from typing import Optional
 
 
-class Band(BaseModel):
+class BandCreate(BaseModel):
     name: str
+    created_at: Optional[date]
+
+
+class BandUpdate(BaseModel):
+    id: int
+    name: Optional[str]
     created_at: Optional[date]

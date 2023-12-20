@@ -2,7 +2,7 @@ from fastapi import APIRouter
 from fastapi.responses import JSONResponse, Response
 from fastapi.encoders import jsonable_encoder
 from . import service
-from .schemas import Band as BandSchema
+from .schemas import BandCreate, BandUpdate
 
 
 router: APIRouter = APIRouter(
@@ -32,14 +32,14 @@ async def get_band_by_id(id: int) -> JSONResponse:
 
 
 @router.post('/band')
-async def add_band(band: BandSchema) -> Response:
+async def add_band(band: BandCreate) -> Response:
     await service.add_band(band.name, band.created_at)
 
     return Response(status_code=200)
 
 
 @router.put('/band')
-async def update_band(band: BandSchema) -> Response:
+async def update_band(band: BandUpdate) -> Response:
     await service.update_band(band.id, band.name, band.created_at)
 
     return Response(status_code=200)
