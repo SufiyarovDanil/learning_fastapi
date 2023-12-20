@@ -29,7 +29,7 @@ async def add_band(name: str, created_at: date = None) -> None:
 
 async def update_band(id: int, name: str = None, created_at: date = None) -> None:
     async with async_session_factory() as session:
-        band: BandModel = session.get(BandModel, id)
+        band: BandModel = await session.get(BandModel, id)
 
         if name is not None:
             band.name = name
