@@ -1,7 +1,7 @@
 from sqlalchemy import SmallInteger, BigInteger, VARCHAR, Date, ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from database import BaseModel
-from bands.models import BandModel, GenreModel
+#from bands.models import BandModel, GenreModel
 
 
 class AlbumModel(BaseModel):
