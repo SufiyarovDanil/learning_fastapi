@@ -1,7 +1,7 @@
 from sqlalchemy import SmallInteger, BigInteger, VARCHAR, Date, ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from database import BaseModel
-#from bands.models import BandModel, GenreModel
+import bands.models
 
 
 class AlbumModel(BaseModel):
@@ -30,9 +30,9 @@ class AlbumModel(BaseModel):
         name='fk_band_id'
     )
 
-    band: Mapped['BandModel'] = relationship(back_populates='albums')
+    band: Mapped['bands.models.BandModel'] = relationship(back_populates='albums')
     tracks: Mapped[list['TrackModel']] = relationship(back_populates='album')
-    genres: Mapped[list['GenreModel']] = relationship(secondary='album_genre')
+    genres: Mapped[list['bands.models.GenreModel']] = relationship(secondary='album_genre')
 
 
 class TrackModel(BaseModel):
