@@ -31,6 +31,9 @@ async def update_band(id: int, name: str = None, created_at: date = None) -> Non
     async with async_session_factory() as session:
         band: BandModel = await session.get(BandModel, id)
 
+        if band is None:
+            return # TODO create exception for this
+
         if name is not None:
             band.name = name
         if created_at is not None:
