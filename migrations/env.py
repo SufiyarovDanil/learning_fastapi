@@ -5,15 +5,14 @@ from sqlalchemy import pool
 
 from alembic import context
 
-from config import config as env_config
-from database import BaseModel
+from database import BaseModel, DATABASE_URI_ASYNCPG
 from bands.models import BandModel, GenreModel, AlbumGenreModel
 from albums.models import AlbumModel, TrackModel
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
 config = context.config
-config.set_main_option('sqlalchemy.url', env_config.database_uri_asyncpg + '?async_fallback=True')
+config.set_main_option('sqlalchemy.url', DATABASE_URI_ASYNCPG + '?async_fallback=True')
 
 
 # Interpret the config file for Python logging.

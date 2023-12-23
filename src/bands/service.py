@@ -45,5 +45,5 @@ async def update_band(id: int, name: str = None, created_at: date = None) -> Non
 async def delete_band(id: int) -> None:
     async with async_session_factory() as session:
         statement = delete(BandModel).where(BandModel.id == id)
-        session.execute(statement)
+        await session.execute(statement)
         await session.commit()

@@ -12,7 +12,7 @@ class AlbumModel(BaseModel):
         autoincrement=True,
         name='pk_id'
     )
-    name: Mapped[VARCHAR(150)] = mapped_column(
+    name: Mapped[VARCHAR] = mapped_column(
         VARCHAR(150),
         nullable=False,
         name='name'
