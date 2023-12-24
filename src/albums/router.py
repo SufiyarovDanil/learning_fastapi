@@ -2,6 +2,7 @@ from fastapi import APIRouter
 from fastapi.responses import JSONResponse, Response
 from fastapi.encoders import jsonable_encoder
 from . import service
+from .exceptions import AlbumNotFound
 from .schemas import AlbumCreate, AlbumUpdate
 
 
@@ -16,7 +17,7 @@ async def get_all_albums() -> JSONResponse:
     album_list = await service.get_all_albums()
 
     if len(album_list) == 0:
-        return JSONResponse(content=None, status_code=400)
+        raise AlbumNotFound()
     
     return JSONResponse(content=jsonable_encoder(album_list), status_code=200)
 
@@ -26,7 +27,7 @@ async def get_album_by_id(album_id: int) -> JSONResponse:
     band = await service.get_album_by_id(album_id)
 
     if band is None:
-        return JSONResponse(content=None, status_code=400)
+        raise AlbumNotFound()
 
     return JSONResponse(content=jsonable_encoder(band), status_code=200)
 
