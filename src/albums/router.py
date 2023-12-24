@@ -22,8 +22,8 @@ async def get_all_albums() -> JSONResponse:
 
 
 @router.get('album/{id}')
-async def get_album_by_id(id: int) -> JSONResponse:
-    band = await service.get_album_by_id(id)
+async def get_album_by_id(album_id: int) -> JSONResponse:
+    band = await service.get_album_by_id(album_id)
 
     if band is None:
         return JSONResponse(content=None, status_code=400)
@@ -51,7 +51,7 @@ async def update_album(album: AlbumUpdate) -> Response:
 
 
 @router.delete('/album')
-async def delete_album(id: int) -> Response:
-    await service.delete_album(id)
+async def delete_album(album_id: int) -> Response:
+    await service.delete_album(album_id)
 
     return Response(status_code=200)

@@ -22,8 +22,8 @@ async def get_all_bands() -> JSONResponse:
 
 
 @router.get('band/{id}')
-async def get_band_by_id(id: int) -> JSONResponse:
-    band = await service.get_band_by_id(id)
+async def get_band_by_id(band_id: int) -> JSONResponse:
+    band = await service.get_band_by_id(band_id)
 
     if band is None:
         return JSONResponse(content=None, status_code=400)
@@ -46,7 +46,7 @@ async def update_band(band: BandUpdate) -> Response:
 
 
 @router.delete('/band')
-async def delete_band(id: int) -> Response:
-    await service.delete_band(id)
+async def delete_band(band_id: int) -> Response:
+    await service.delete_band(band_id)
 
     return Response(status_code=200)
