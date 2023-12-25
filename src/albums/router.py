@@ -1,8 +1,10 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, Depends
 from fastapi.responses import JSONResponse, Response
 from fastapi.encoders import jsonable_encoder
+from sqlalchemy import RowMapping
 from . import service
 from .exceptions import AlbumNotFound, FailedToUpdateAlbum
+from .dependencies import valid_album_id
 from .schemas import AlbumCreate, AlbumUpdate
 
 
@@ -15,21 +17,13 @@ router: APIRouter = APIRouter(
 @router.get('/album/')
 async def get_all_albums() -> JSONResponse:
     album_list = await service.get_all_albums()
-
-    if len(album_list) == 0:
-        raise AlbumNotFound()
     
     return JSONResponse(content=jsonable_encoder(album_list), status_code=200)
 
 
 @router.get('album/{id}')
-async def get_album_by_id(album_id: int) -> JSONResponse:
-    band = await service.get_album_by_id(album_id)
-
-    if band is None:
-        raise AlbumNotFound()
-
-    return JSONResponse(content=jsonable_encoder(band), status_code=200)
+async def get_album_by_id(album: RowMapping = Depends(valid_album_id)) -> JSONResponse:
+    return JSONResponse(content=jsonable_encoder(album), status_code=200)
 
 
 @router.post('/album')
