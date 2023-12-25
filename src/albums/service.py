@@ -14,7 +14,7 @@ async def get_all_albums() -> Sequence[RowMapping]:
     return result.mappings().all()
 
 
-async def get_album_by_id(album_id: int) -> AlbumModel | None:
+async def get_album_by_id(album_id: int) -> RowMapping | None:
     async with async_session_factory() as session:
         query = select(AlbumModel).where(AlbumModel.id == album_id)
         result = await session.execute(query)
