@@ -63,3 +63,20 @@ async def delete_album(album_id: int) -> None:
         statement = delete(AlbumModel).where(AlbumModel.id == album_id)
         await session.execute(statement)
         await session.commit()
+
+
+async def is_album_exists(name: str, band_id: int, published_at: date) -> bool:
+    async with async_session_factory() as session:
+        query = (
+            select(AlbumModel)
+            .where(
+                AlbumModel.name == name
+                and AlbumModel.band_id == band_id
+                and AlbumModel.published_at == published_at
+            )
+        )
+
+        result = await session.execute(query)
+        is_exists: bool = result.one_or_none() is not None
+
+    return is_exists
