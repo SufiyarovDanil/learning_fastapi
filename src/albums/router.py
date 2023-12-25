@@ -2,7 +2,7 @@ from fastapi import APIRouter
 from fastapi.responses import JSONResponse, Response
 from fastapi.encoders import jsonable_encoder
 from . import service
-from .exceptions import AlbumNotFound
+from .exceptions import AlbumNotFound, FailedToUpdateAlbum
 from .schemas import AlbumCreate, AlbumUpdate
 
 
@@ -41,12 +41,15 @@ async def add_band(album: AlbumCreate) -> Response:
 
 @router.put('/album')
 async def update_album(album: AlbumUpdate) -> Response:
-    await service.update_album(
+    album = await service.update_album(
         album.id,
         album.name,
         album.band_id,
         album.published_at
     )
+
+    if album is None:
+        raise FailedToUpdateAlbum()
 
     return Response(status_code=200)
 
