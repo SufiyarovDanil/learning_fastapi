@@ -20,7 +20,7 @@ async def get_all_albums() -> JSONResponse:
     return JSONResponse(content=jsonable_encoder(album_list), status_code=200)
 
 
-@router.get('album/{id}')
+@router.get('/album/{id}')
 async def get_album_by_id(album: RowMapping = Depends(valid_album_id)) -> JSONResponse:
     return JSONResponse(content=jsonable_encoder(album), status_code=200)
 
