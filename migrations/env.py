@@ -6,8 +6,9 @@ from sqlalchemy import pool
 from alembic import context
 
 from database import BaseModel, DATABASE_URI_ASYNCPG
-from bands.models import BandModel, GenreModel, AlbumGenreModel
+from bands.models import BandModel, AlbumGenreModel
 from albums.models import AlbumModel, TrackModel
+from genres.models import GenreModel
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
