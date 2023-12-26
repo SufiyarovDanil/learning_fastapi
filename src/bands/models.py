@@ -26,23 +26,6 @@ class BandModel(BaseModel):
     albums = relationship('AlbumModel', back_populates='band')
 
 
-class GenreModel(BaseModel):
-    __tablename__ = 'genre'
-
-    id: Mapped[BigInteger] = mapped_column(
-        BigInteger,
-        primary_key=True,
-        autoincrement=True,
-        name='pk_id'
-    )
-    name: Mapped[VARCHAR] = mapped_column(
-        VARCHAR(32),
-        nullable=False,
-        unique=True,
-        name='name'
-    )
-
-
 class AlbumGenreModel(BaseModel):
     __tablename__ = 'album_genre'
 
