@@ -13,12 +13,12 @@ async def valid_band_id(band_id: int) -> RowMapping:
     return band
 
 
-async def valid_creating_album(band: BandCreate) -> None:
+async def valid_creating_band(band: BandCreate) -> None:
     exists: bool = await service.is_band_exists(band.name, band.created_at)
 
     if exists:
         raise exc.BandAlreadyExists()
 
 
-async def valid_updating_album(band: BandUpdate) -> None:
+async def valid_updating_band(band: BandUpdate) -> None:
     await valid_band_id(band.id)
