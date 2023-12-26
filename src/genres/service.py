@@ -57,7 +57,7 @@ async def delete_genre(genre_id: int) -> None:
 
 async def is_genre_exists(name: str) -> bool:
     async with async_session_factory() as session:
-        query = select(GenreModel).where(GenreModel.id == genre_id and GenreModel.name == name)
+        query = select(GenreModel).where(GenreModel.name == name)
         result = await session.execute(query)
         is_exists: bool = result.one_or_none() is not None
 
