@@ -20,7 +20,7 @@ async def get_all_bands() -> JSONResponse:
     return JSONResponse(content=jsonable_encoder(band_list), status_code=200)
 
 
-@router.get('band/{id}')
+@router.get('/band/{id}')
 async def get_band_by_id(band: RowMapping = Depends(valid_band_id)) -> JSONResponse:
     return JSONResponse(content=jsonable_encoder(band), status_code=200)
 
