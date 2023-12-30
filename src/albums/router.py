@@ -14,8 +14,8 @@ router: APIRouter = APIRouter(
 
 
 @router.get('/album/')
-async def get_all_albums() -> JSONResponse:
-    album_list = await service.get_all_albums()
+async def get_all_albums(with_tracks: bool = False) -> JSONResponse:
+    album_list = await service.get_all_albums(with_tracks)
     
     return JSONResponse(content=jsonable_encoder(album_list), status_code=200)
 

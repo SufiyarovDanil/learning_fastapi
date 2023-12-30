@@ -1,25 +1,34 @@
 from typing import Sequence
 from sqlalchemy import select, delete, RowMapping
+from sqlalchemy.orm import joinedload
 from sqlalchemy.exc import SQLAlchemyError
 from datetime import date
 from database import async_session_factory
 from .models import AlbumModel
 
 
-async def get_all_albums() -> Sequence[RowMapping]:
+async def get_all_albums(with_tracks: bool = False) -> Sequence[RowMapping]:
     async with async_session_factory() as session:
         query = select(AlbumModel)
+
+        if with_tracks:
+            query = query.options(joinedload(AlbumModel.tracks))
+
         result = await session.execute(query)
 
-    return result.mappings().all()
+    return result.unique().mappings().all() if with_tracks else result.mappings().all()
 
 
-async def get_album_by_id(album_id: int) -> RowMapping | None:
+async def get_album_by_id(album_id: int, with_tracks: bool = False) -> RowMapping | None:
     async with async_session_factory() as session:
         query = select(AlbumModel).where(AlbumModel.id == album_id)
+
+        if with_tracks:
+            query = query.options(joinedload(AlbumModel.tracks))
+
         result = await session.execute(query)
 
-    return result.mappings().one_or_none()
+    return result.unique().mappings().one_or_none() if with_tracks else result.mappings().one_or_none()
 
 
 async def add_album(name: str, band_id: int, published_at: date = None) -> AlbumModel | None:
